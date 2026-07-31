@@ -1,3 +1,6 @@
+# Credenciales SMTP y correo destino: SOLO en el servidor, nunca en el repo
+config.php
+
 # Material de trabajo y originales pesados (no forman parte de la web publicada)
 uploads/
 screenshots/
