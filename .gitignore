@@ -1,0 +1,12 @@
+# Material de trabajo y originales pesados (no forman parte de la web publicada)
+uploads/
+screenshots/
+.thumbnail
+PARRILLA DE ICONOGRAFIA *.png
+Prompts *.md
+Instagram The Petit Club.dc.html
+assets/hero.jpeg
+assets/sello.png
+_blank.html
+_debug.html
+node_modules/

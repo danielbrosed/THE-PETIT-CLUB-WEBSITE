@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Petit Club · Experiencias infantiles a medida en Barcelona</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Experiencias infantiles a medida para cumpleaños, bodas y eventos en Barcelona. Juegos, talleres y acompañamiento profesional para los más pequeños.">
+<meta name="theme-color" content="#F1EBDD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#F1EBDD;color:#5C4B3D;font-family:'Sorts Mill Goudy',Georgia,serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:#5A6733;text-decoration:none}
+a:hover{color:#6A4E3C}
+::selection{background:#CDA349;color:#FAF6EC}
+img{max-width:100%}
+@keyframes tpcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes tpcSpin{to{transform:rotate(360deg)}}
+@keyframes tpcMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes tpcPulse{0%{transform:scale(1);opacity:.85}70%{transform:scale(1.55);opacity:0}100%{transform:scale(1.55);opacity:0}}
+
+/* ---------- Accesibilidad / anclas ---------- */
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid #B0864C;outline-offset:3px;border-radius:4px}
+#ofrecemos,#experiencias,#incluye,#info,#extras,#contacto{scroll-margin-top:80px}
+#petit-birthday,#petit-wedding,#petit-care,#petit-business{scroll-margin-top:150px}
+
+/* ---------- Hovers reales (sustituyen a style-hover) ---------- */
+.tpc-nl:hover{color:#5A6733!important}
+.tpc-pill:hover{background:#485226!important;color:#FAF6EC!important}
+.tpc-btn-primary:hover{background:#485226!important}
+.tpc-btn-ghost:hover{border-color:#5A6733!important;background:#EAE2CF!important}
+.tpc-btn-line:hover{background:#5A6733!important;color:#F3ECDC!important}
+.tpc-svc:hover{background:#EAE2CF!important;padding-left:24px!important}
+.tpc-x-card{cursor:pointer}
+.tpc-x-card:hover,.tpc-x-card:focus-visible{transform:translateY(-6px);box-shadow:0 24px 44px -30px rgba(74,62,48,.4)}
+
+/* ---------- Menú móvil ---------- */
+.tpc-burger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:44px;height:44px;background:transparent;border:1px solid rgba(106,78,60,.25);border-radius:50%;cursor:pointer;padding:0;flex-shrink:0;transition:border-color .3s,background .3s}
+.tpc-burger:hover{background:#EAE2CF}
+.tpc-burger span{display:block;width:18px;height:1.5px;background:#5A6733;transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .3s}
+.tpc-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.tpc-burger.open span:nth-child(2){opacity:0}
+.tpc-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.tpc-mnav{display:none;grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.22,1,.36,1)}
+.tpc-mnav.open{grid-template-rows:1fr}
+.tpc-mnav-in{min-height:0;overflow:hidden;visibility:hidden;display:flex;flex-direction:column;padding:0 26px;transition:visibility .55s}
+.tpc-mnav.open .tpc-mnav-in{visibility:visible}
+.tpc-mnav a{padding:15px 2px;border-bottom:1px solid rgba(106,78,60,.12);font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:#6A5A49}
+.tpc-mnav a.tpc-mnav-cta{border-bottom:none;margin:18px 0 24px;background:#5A6733;color:#F3ECDC;text-align:center;padding:14px 22px;border-radius:100px;letter-spacing:.24em}
+
+/* ---------- Apilado de experiencias (desktop / tablet) ---------- */
+@media (min-width:861px) and (min-height:641px){
+  .tpc-exp{position:sticky;transform-origin:top center;will-change:transform}
+  #petit-birthday{top:88px}
+  #petit-wedding{top:100px}
+  #petit-care{top:112px}
+  #petit-business{top:124px}
+  .tpc-exp-img{max-height:54vh}
+}
+
+/* ---------- Botón flotante WhatsApp ---------- */
+.tpc-wa{position:fixed;right:22px;bottom:22px;z-index:90;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -10px rgba(24,70,44,.55);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.tpc-wa:hover{transform:translateY(-4px) scale(1.06);box-shadow:0 20px 38px -12px rgba(24,70,44,.6)}
+.tpc-wa::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(37,211,102,.5);animation:tpcPulse 2.8s ease-out infinite;pointer-events:none}
+.tpc-wa svg{width:32px;height:32px;display:block}
+
+/* ---------- Modales Petit Extras ---------- */
+.tpc-modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:30px}
+.tpc-modal.open{display:flex}
+.tpc-modal-back{position:absolute;inset:0;background:rgba(56,47,36,.45);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);opacity:0;transition:opacity .5s ease}
+.tpc-modal.in .tpc-modal-back{opacity:1}
+.tpc-modal-panel{position:relative;z-index:1;width:min(880px,100%);max-height:min(86vh,860px);overflow-y:auto;background:#FBF8F0;border:1px solid rgba(106,78,60,.18);border-radius:22px;box-shadow:0 50px 100px -40px rgba(40,32,24,.6);opacity:0;transform:translateY(48px) scale(.98);transition:transform .65s cubic-bezier(.22,1,.36,1),opacity .5s ease}
+.tpc-modal.in .tpc-modal-panel{opacity:1;transform:none}
+.tpc-modal-x{position:absolute;top:16px;right:16px;z-index:2;width:42px;height:42px;border-radius:50%;border:1px solid rgba(106,78,60,.25);background:rgba(251,248,240,.92);color:#5A6733;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s,transform .45s cubic-bezier(.22,1,.36,1)}
+.tpc-modal-x:hover{background:#EAE2CF;transform:rotate(90deg)}
+.tpc-modal-grid{display:grid;grid-template-columns:340px 1fr}
+.tpc-modal-media{padding:36px 0 36px 36px}
+.tpc-modal-media img{width:100%;height:100%;min-height:420px;object-fit:cover;border-radius:170px 170px 14px 14px;border:1px solid rgba(106,78,60,.16);display:block}
+.tpc-modal-body{padding:44px 42px 40px}
+.tpc-kicker{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#B0864C;margin-bottom:10px}
+.tpc-modal-body h3{margin:0 0 12px;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(30px,4vw,40px);color:#5A6733;line-height:1.05}
+.tpc-modal-lead{margin:0 0 14px;font-style:italic;font-size:20px;line-height:1.4;color:#6A4E3C}
+.tpc-modal-txt{margin:0 0 18px;font-size:17px;line-height:1.7;color:#5C4B3D}
+.tpc-modal-list{display:flex;flex-direction:column;margin:0 0 22px}
+.tpc-modal-list div{display:flex;align-items:flex-start;gap:11px;padding:9px 0;border-bottom:1px solid rgba(106,78,60,.12);font-size:16.5px;line-height:1.5;color:#5C4B3D}
+.tpc-modal-list svg{flex-shrink:0;margin-top:5px}
+.tpc-modal-price{font-family:'Sorts Mill Goudy',Georgia,serif;font-size:30px;color:#B0864C;margin:0 0 4px}
+.tpc-modal-note{font-style:italic;font-size:14.5px;color:#6f6050;margin:0 0 18px}
+.tpc-modal-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+
+/* ---------- Botones CSS (formulario y modales) ---------- */
+.tpc-cta-solid{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#F3ECDC;background:#5A6733;border:1px solid #5A6733;padding:15px 32px;border-radius:100px;cursor:pointer;transition:background .3s,transform .3s}
+.tpc-cta-solid:hover{background:#485226;color:#FAF6EC;transform:translateY(-2px)}
+.tpc-cta-line{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#5A6733;background:transparent;border:1px solid #A9976F;padding:15px 32px;border-radius:100px;cursor:pointer;transition:border-color .3s,background .3s,transform .3s}
+.tpc-cta-line:hover{border-color:#5A6733;background:#EAE2CF;color:#5A6733;transform:translateY(-2px)}
+
+/* ---------- Formulario de contacto ---------- */
+.tpc-form{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:36px 0 6px;text-align:left}
+.tpc-span2{grid-column:1/-1}
+.tpc-field{display:flex;flex-direction:column;gap:7px}
+.tpc-field label{font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#8A7A66}
+.tpc-input{width:100%;background:#F4EEDF;border:1px solid rgba(106,78,60,.22);border-radius:10px;padding:13px 15px;font-family:'Sorts Mill Goudy',Georgia,serif;font-size:17px;color:#5C4B3D;outline:none;transition:border-color .3s,background .3s,box-shadow .3s;appearance:none;-webkit-appearance:none}
+.tpc-input:focus{border-color:#5A6733;background:#FBF8F0;box-shadow:0 0 0 3px rgba(90,103,51,.12)}
+.tpc-input::placeholder{color:#B7A98F;font-style:italic}
+.tpc-input[type="date"]{min-height:49px}
+.tpc-input[type=number]::-webkit-outer-spin-button,.tpc-input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.tpc-input[type=number]{-moz-appearance:textfield}
+select.tpc-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%235A6733' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:12px;padding-right:38px;cursor:pointer}
+select.tpc-input:invalid{color:#A6987F;font-style:italic}
+textarea.tpc-input{min-height:120px;resize:vertical}
+.tpc-form-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.tpc-form-note{margin:8px 0 0;font-size:13.5px;font-style:italic;color:#6f6050;text-align:center}
+#tpc-form-ok{margin:14px 0 0;font-size:16.5px;color:#5A6733;text-align:center;font-style:italic}
+
+/* ---------- Móvil ---------- */
+@media (max-width:860px){
+  .tpc-header-in{padding:12px 20px!important;flex-wrap:nowrap!important}
+  .tpc-nav{display:none!important}
+  .tpc-burger{display:flex}
+  .tpc-mnav{display:grid}
+  #inicio{padding:44px 22px 60px!important;gap:40px!important}
+  .tpc-hero-bg{width:430px!important;height:430px!important;left:-150px!important;top:-70px!important}
+  .tpc-hero-visual{min-height:440px!important}
+  .tpc-hero-arch{width:80%!important}
+  .tpc-seal{width:128px!important;height:128px!important;left:-4px!important}
+  .tpc-marq{font-size:17px!important}
+  #ofrecemos{padding:76px 22px 24px!important}
+  .tpc-svc{grid-template-columns:34px 1fr!important;gap:2px 14px!important;padding:20px 4px!important}
+  .tpc-svc-price{grid-column:2!important;font-size:11px!important}
+  #experiencias{padding:64px 18px 30px!important}
+  .tpc-exp{padding:22px 20px 32px!important;gap:24px!important;margin-bottom:26px!important;border-radius:20px!important}
+  .tpc-exp-img{min-height:250px!important}
+  #incluye{padding:64px 20px!important}
+  .tpc-incl{font-size:20px!important}
+  #info{padding:76px 22px 36px!important}
+  #info p{font-size:16.5px!important}
+  #extras{padding:48px 22px 24px!important}
+  .tpc-x-card{padding:26px 22px!important}
+  #contacto{padding:84px 20px 44px!important}
+  .tpc-form{grid-template-columns:1fr}
+  .tpc-form-actions{flex-direction:column;align-items:stretch}
+  .tpc-contact-lines{font-size:17px!important}
+  .tpc-wa{width:54px;height:54px;right:16px;bottom:16px}
+  .tpc-wa svg{width:28px;height:28px}
+  .tpc-modal{padding:0;align-items:flex-end}
+  .tpc-modal-panel{max-height:88vh;max-height:92dvh;border-radius:24px 24px 0 0;transform:translateY(100%)}
+  .tpc-modal-grid{grid-template-columns:1fr}
+  .tpc-modal-media{padding:16px 16px 0}
+  .tpc-modal-media img{min-height:0;height:215px;border-radius:16px}
+  .tpc-modal-body{padding:26px 22px 34px}
+}
+@media (max-width:480px){
+  #inicio h1{font-size:54px!important}
+  .tpc-marq{font-size:16px!important}
+}
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</helmet>
+
+<div style="overflow-x:hidden;overflow-x:clip">
+
+<header class="tpc-header" style="position:sticky;top:0;z-index:60;background:rgba(241,235,221,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(106,78,60,.13)">
+  <div class="tpc-header-in" style="max-width:1180px;margin:0 auto;padding:15px 30px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+    <a href="#inicio" aria-label="The Petit Club — inicio" style="display:flex;flex-direction:column;line-height:1;gap:3px">
+      <span style="font-family:'Jost',sans-serif;font-size:9.5px;letter-spacing:.44em;color:#8A7A66;padding-left:3px">THE</span>
+      <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:600;font-size:21px;letter-spacing:.13em;color:#5A6733">PETIT CLUB</span>
+    </a>
+    <nav class="tpc-nav" style="display:flex;gap:24px;align-items:center;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;flex-wrap:wrap">
+      <a class="tpc-nl" href="#ofrecemos" style="color:#6A5A49;transition:color .3s">Qué ofrecemos</a>
+      <a class="tpc-nl" href="#experiencias" style="color:#6A5A49;transition:color .3s">Experiencias</a>
+      <a class="tpc-nl" href="#incluye" style="color:#6A5A49;transition:color .3s">Qué incluye</a>
+      <a class="tpc-nl" href="#info" style="color:#6A5A49;transition:color .3s">Info</a>
+      <a class="tpc-nl" href="#extras" style="color:#6A5A49;transition:color .3s">Extras</a>
+      <a class="tpc-nl" href="#contacto" style="color:#6A5A49;transition:color .3s">Contacto</a>
+      <a class="tpc-pill" href="{{ reservarUrl }}" style="background:#5A6733;color:#F3ECDC;padding:9px 21px;border-radius:100px;font-size:11px;letter-spacing:.22em;transition:background .3s">Reservar</a>
+    </nav>
+    <button type="button" class="tpc-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="tpc-mnav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="tpc-mnav" id="tpc-mnav" aria-label="Menú móvil">
+    <div class="tpc-mnav-in">
+      <a href="#ofrecemos">Qué ofrecemos</a>
+      <a href="#experiencias">Experiencias</a>
+      <a href="#incluye">Qué incluye</a>
+      <a href="#info">Info</a>
+      <a href="#extras">Petit Extras</a>
+      <a href="#contacto">Contacto</a>
+      <a class="tpc-mnav-cta" href="{{ reservarUrl }}">Reservar experiencia</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section id="inicio" style="position:relative;max-width:1180px;margin:0 auto;padding:64px 30px 80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:56px;align-items:center">
+  <div class="tpc-hero-bg" aria-hidden="true" style="position:absolute;z-index:-1;left:-190px;top:-130px;width:790px;height:790px;opacity:.26;filter:blur(3px);transform:rotate(-14deg);pointer-events:none">
+    <svg viewBox="0 0 200 200" width="100%" height="100%" fill="none"><circle cx="100" cy="100" r="94" stroke="#7C8A50" stroke-width="1.6"/><defs><path id="tpcTopW" d="M42 100 A58 58 0 0 1 158 100"/><path id="tpcBotW" d="M42 100 A58 58 0 0 0 158 100"/></defs><text fill="#7C8A50" font-family="Sorts Mill Goudy, serif" font-size="16" letter-spacing="2.4"><textPath href="#tpcTopW" startOffset="50%" text-anchor="middle">THE PETIT CLUB</textPath></text><text fill="#7C8A50" font-family="Sorts Mill Goudy, serif" font-size="13.5" letter-spacing="2.2"><textPath href="#tpcBotW" startOffset="50%" side="left" text-anchor="middle">LITTLE EXPLORERS</textPath></text><g stroke="#7C8A50" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M80 105 L100 87 L120 105"/><path d="M84 102 V121 H116 V102"/><path d="M95 121 V111 H105 V121"/></g><path d="M124 83 l1.5 3.9 4.1.3 -3.2 2.7 1 4 -3.4-2.2 -3.4 2.2 1-4 -3.2-2.7 4.1-.3 Z" fill="#7C8A50"/><circle cx="61" cy="112" r="2" fill="#7C8A50"/><circle cx="139" cy="112" r="2" fill="#7C8A50"/></svg>
+  </div>
+  <div data-reveal>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:26px">
+      <span style="width:38px;height:1px;background:#B0864C"></span>
+      <span style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:#8A7A66">Little Explorers · Barcelona</span>
+    </div>
+    <div style="font-family:'Jost',sans-serif;font-weight:300;letter-spacing:.52em;font-size:16px;color:#8A7A66;margin-left:6px;margin-bottom:4px">THE</div>
+    <h1 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(58px,9vw,116px);line-height:.86;letter-spacing:.01em;color:#5A6733">Petit&nbsp;Club</h1>
+    <div style="margin:30px 0 26px;width:150px">
+      <svg viewBox="0 0 150 34" width="150" height="34" fill="none" stroke="#7C8A50" stroke-width="1.3" stroke-linecap="round">
+        <path d="M6 24 Q75 12 144 22"/>
+        <ellipse cx="30" cy="20" rx="8.5" ry="4" transform="rotate(-24 30 20)"/>
+        <ellipse cx="52" cy="16" rx="9" ry="4.2" transform="rotate(-18 52 16)"/>
+        <ellipse cx="76" cy="14" rx="9.5" ry="4.4" transform="rotate(-10 76 14)"/>
+        <ellipse cx="100" cy="15" rx="9" ry="4.2" transform="rotate(6 100 15)"/>
+        <ellipse cx="122" cy="17" rx="8.5" ry="4" transform="rotate(14 122 17)"/>
+      </svg>
+    </div>
+    <p style="margin:0 0 12px;font-family:'Sorts Mill Goudy',Georgia,serif;font-size:clamp(24px,3vw,32px);line-height:1.25;color:#6A4E3C;font-weight:500">¡Bienvenidos a <span style="color:#5A6733">THE PETIT CLUB</span>!</p>
+    <p style="margin:0 0 34px;font-family:'Sorts Mill Goudy',Georgia,serif;font-style:italic;font-size:clamp(20px,2.4vw,26px);color:#8A7A66">¿Estáis preparados para la aventura?</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <a class="tpc-btn-primary" href="{{ reservarUrl }}" style="display:inline-flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#F3ECDC;background:#5A6733;padding:15px 30px;border-radius:100px;transition:all .3s">Reservar experiencia</a>
+      <a class="tpc-btn-ghost" href="#experiencias" style="display:inline-flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#5A6733;border:1px solid #A9976F;padding:15px 30px;border-radius:100px;transition:all .3s">Ver experiencias</a>
+    </div>
+  </div>
+
+  <div class="tpc-hero-visual" data-reveal style="position:relative;min-height:520px;display:flex;justify-content:center;align-items:center">
+    <div style="position:absolute;inset:auto 0 0 auto;width:78%;height:82%;bottom:0;right:0;border-radius:200px 200px 18px 18px;background-color:#FAF6EC;background-image:repeating-linear-gradient(0deg,rgba(150,164,116,.34) 0 15px,transparent 15px 30px),repeating-linear-gradient(90deg,rgba(150,164,116,.34) 0 15px,transparent 15px 30px)"></div>
+    <div class="tpc-hero-arch" style="position:relative;width:72%;max-width:430px;aspect-ratio:4/5;border-radius:210px 210px 16px 16px;overflow:hidden;border:1px solid rgba(106,78,60,.18);box-shadow:0 30px 60px -30px rgba(74,62,48,.4);margin-top:auto">
+      <img src="assets/img/hero.jpg" alt="The Petit Club · pequeños exploradores" fetchpriority="high" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+    <div class="tpc-seal" style="position:absolute;left:-2%;bottom:12px;width:200px;height:200px;background:#FBF8F0;border-radius:50%;box-shadow:0 22px 44px -20px rgba(74,62,48,.55);padding:12px;border:1px solid rgba(106,78,60,.12);animation:tpcSpin 60s linear infinite"><svg viewBox="0 0 200 200" width="100%" height="100%" fill="none"><circle cx="100" cy="100" r="94" stroke="#9BA87D" stroke-width="1.3"/><defs><path id="tpcTopH" d="M42 100 A58 58 0 0 1 158 100"/><path id="tpcBotH" d="M42 100 A58 58 0 0 0 158 100"/></defs><text fill="#8A9666" font-family="Sorts Mill Goudy, serif" font-size="16" letter-spacing="2.4"><textPath href="#tpcTopH" startOffset="50%" text-anchor="middle">THE PETIT CLUB</textPath></text><text fill="#8A9666" font-family="Sorts Mill Goudy, serif" font-size="13.5" letter-spacing="2.2"><textPath href="#tpcBotH" startOffset="50%" side="left" text-anchor="middle">LITTLE EXPLORERS</textPath></text><g stroke="#9BA87D" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M80 105 L100 87 L120 105"/><path d="M84 102 V121 H116 V102"/><path d="M95 121 V111 H105 V121"/></g><path d="M124 83 l1.5 3.9 4.1.3 -3.2 2.7 1 4 -3.4-2.2 -3.4 2.2 1-4 -3.2-2.7 4.1-.3 Z" fill="#9BA87D"/><circle cx="61" cy="112" r="2" fill="#9BA87D"/><circle cx="139" cy="112" r="2" fill="#9BA87D"/></svg></div>
+  </div>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<sc-if value="{{ showMarquee }}" hint-placeholder-val="{{ true }}">
+<div style="overflow:hidden;background:#5A6733;padding:15px 0;border-top:1px solid rgba(74,62,48,.2);border-bottom:1px solid rgba(74,62,48,.2)">
+  <div class="tpc-marq" style="display:inline-flex;white-space:nowrap;animation:tpcMarquee 32s linear infinite;font-family:'Sorts Mill Goudy',Georgia,serif;font-size:23px;letter-spacing:.22em;color:#EFE7D3">
+    <span>&nbsp;LITTLE EXPLORERS&nbsp; ✦ &nbsp;THE PETIT CLUB&nbsp; ✦ &nbsp;BARCELONA&nbsp; ✦ &nbsp;IMAGINAR&nbsp; ✦ &nbsp;CRECER&nbsp; ✦ &nbsp;DESCUBRIR&nbsp; ✦ &nbsp;PERTENECER&nbsp; ✦ </span>
+    <span aria-hidden="true">&nbsp;LITTLE EXPLORERS&nbsp; ✦ &nbsp;THE PETIT CLUB&nbsp; ✦ &nbsp;BARCELONA&nbsp; ✦ &nbsp;IMAGINAR&nbsp; ✦ &nbsp;CRECER&nbsp; ✦ &nbsp;DESCUBRIR&nbsp; ✦ &nbsp;PERTENECER&nbsp; ✦ </span>
+  </div>
+</div>
+</sc-if>
+
+<!-- ===================== QUÉ OFRECEMOS ===================== -->
+<section id="ofrecemos" style="max-width:1180px;margin:0 auto;padding:104px 30px 40px">
+  <div data-reveal style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:40px">
+    <div>
+      <div style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#B0864C;margin-bottom:14px">01 — Servicios</div>
+      <h2 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(40px,5.4vw,68px);line-height:1;color:#5A6733">¿Qué ofrecemos?</h2>
+    </div>
+    <p style="max-width:340px;margin:0;font-size:18px;line-height:1.6;color:#7d6d5b">Experiencias infantiles a medida para cada tipo de celebración.</p>
+  </div>
+
+  <div data-reveal style="border-top:1px solid rgba(106,78,60,.22)">
+    <a class="tpc-svc" href="#petit-birthday" style="display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:20px;padding:26px 10px;border-bottom:1px solid rgba(106,78,60,.16);transition:all .3s;color:#6A4E3C">
+      <span style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.2em;color:#B0864C">01</span>
+      <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(26px,3.4vw,42px);color:#5A6733">Petit Birthday</span>
+      <span class="tpc-svc-price" style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6f6050">Desde 220 € →</span>
+    </a>
+    <a class="tpc-svc" href="#petit-wedding" style="display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:20px;padding:26px 10px;border-bottom:1px solid rgba(106,78,60,.16);transition:all .3s;color:#6A4E3C">
+      <span style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.2em;color:#B0864C">02</span>
+      <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(26px,3.4vw,42px);color:#5A6733">Petit Wedding</span>
+      <span class="tpc-svc-price" style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6f6050">4 horas · 390 € →</span>
+    </a>
+    <a class="tpc-svc" href="#contacto" style="display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:20px;padding:26px 10px;border-bottom:1px solid rgba(106,78,60,.16);transition:all .3s;color:#6A4E3C">
+      <span style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.2em;color:#B0864C">03</span>
+      <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(26px,3.4vw,42px);color:#5A6733">Petit Celebrations</span>
+      <span class="tpc-svc-price" style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6f6050">Consultar →</span>
+    </a>
+    <a class="tpc-svc" href="#petit-care" style="display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:20px;padding:26px 10px;border-bottom:1px solid rgba(106,78,60,.16);transition:all .3s;color:#6A4E3C">
+      <span style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.2em;color:#B0864C">04</span>
+      <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(26px,3.4vw,42px);color:#5A6733">Petit Care</span>
+      <span class="tpc-svc-price" style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6f6050">Desde 95 € →</span>
+    </a>
+    <a class="tpc-svc" href="#petit-business" style="display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:20px;padding:26px 10px;border-bottom:1px solid rgba(106,78,60,.16);transition:all .3s;color:#6A4E3C">
+      <span style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.2em;color:#B0864C">05</span>
+      <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(26px,3.4vw,42px);color:#5A6733">Petit Business</span>
+      <span class="tpc-svc-price" style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#6f6050">Desde 250 € →</span>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== EXPERIENCIAS (apilado con scroll) ===================== -->
+<section id="experiencias" style="max-width:1180px;margin:0 auto;padding:80px 30px 60px">
+  <div data-reveal style="text-align:center;margin-bottom:56px">
+    <div style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#B0864C;margin-bottom:12px">02 — Experiencias</div>
+    <h2 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(40px,5.4vw,68px);color:#5A6733">Cada momento, a su medida</h2>
+  </div>
+
+  <!-- Petit Birthday -->
+  <div id="petit-birthday" class="tpc-exp" style="background:#FBF8F0;border:1px solid rgba(106,78,60,.16);border-radius:26px;box-shadow:0 -16px 40px -34px rgba(74,62,48,.3),0 30px 60px -38px rgba(74,62,48,.45);padding:clamp(26px,4vw,52px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px;align-items:center;margin-bottom:36px">
+    <div class="tpc-exp-img" style="position:relative;min-height:380px;border-radius:170px 170px 14px 14px;overflow:hidden;border:1px solid rgba(106,78,60,.16);background:repeating-linear-gradient(135deg,#EBE3D0 0 16px,#F4EDDD 16px 32px)">
+      <img src="assets/img/petit-birthday.jpg" alt="Petit Birthday" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><img src="assets/icons/icon-tarta.png" alt="" width="30" height="30" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><h3 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(30px,3.6vw,44px);color:#5A6733">Petit Birthday</h3></div>
+      <p style="margin:0 0 16px;font-family:'Sorts Mill Goudy',Georgia,serif;font-style:italic;font-size:21px;line-height:1.35;color:#6A4E3C">¿Quieres que el cumpleaños de tu peque sea inolvidable?</p>
+      <p style="margin:0 0 24px;font-size:17.5px;line-height:1.7;color:#5C4B3D;max-width:52ch">En The Petit Club nos encargamos de crear una experiencia llena de juegos, creatividad y diversión para que los más pequeños vivan un día mágico y tú solo tengas que disfrutar del momento.</p>
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:22px">
+        <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:30px;color:#5A6733">Desde 220 €</span>
+      </div>
+      <a class="tpc-btn-line" href="{{ reservarUrl }}" style="display:inline-flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#5A6733;border:1px solid #5A6733;padding:14px 30px;border-radius:100px;transition:all .3s">Reservar</a>
+      <p style="margin:20px 0 0;font-style:italic;font-size:15px;color:#6f6050">Cada celebración es única. Solicita tu presupuesto personalizado.</p>
+    </div>
+  </div>
+
+  <!-- Petit Wedding -->
+  <div id="petit-wedding" class="tpc-exp" style="background:#FBF8F0;border:1px solid rgba(106,78,60,.16);border-radius:26px;box-shadow:0 -16px 40px -34px rgba(74,62,48,.3),0 30px 60px -38px rgba(74,62,48,.45);padding:clamp(26px,4vw,52px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px;align-items:center;margin-bottom:36px">
+    <div style="order:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><img src="assets/icons/icon-anillos.png" alt="" width="30" height="30" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><h3 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(30px,3.6vw,44px);color:#5A6733">Petit Wedding</h3></div>
+      <p style="margin:0 0 16px;font-family:'Sorts Mill Goudy',Georgia,serif;font-style:italic;font-size:21px;line-height:1.35;color:#6A4E3C">¿Te casas y quieres que los más pequeños también vivan un día inolvidable?</p>
+      <p style="margin:0 0 24px;font-size:17.5px;line-height:1.7;color:#5C4B3D;max-width:52ch">Creamos un espacio pensado exclusivamente para ellos, con actividades adaptadas a su edad para que se diviertan mientras vosotros disfrutáis de la celebración con total tranquilidad.</p>
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:22px">
+        <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:30px;color:#5A6733">4 horas · 390 €</span>
+      </div>
+      <a class="tpc-btn-line" href="{{ reservarUrl }}" style="display:inline-flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#5A6733;border:1px solid #5A6733;padding:14px 30px;border-radius:100px;transition:all .3s">Reservar</a>
+      <p style="margin:20px 0 0;font-style:italic;font-size:15px;color:#6f6050">Cada celebración es única. Solicita tu presupuesto personalizado.</p>
+    </div>
+    <div class="tpc-exp-img" style="order:1;position:relative;min-height:380px;border-radius:170px 170px 14px 14px;overflow:hidden;border:1px solid rgba(106,78,60,.16);background:repeating-linear-gradient(135deg,#EBE3D0 0 16px,#F4EDDD 16px 32px)">
+      <img src="assets/img/petit-wedding.jpg" alt="Petit Wedding" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+  </div>
+
+  <!-- Petit Care -->
+  <div id="petit-care" class="tpc-exp" style="background:#FBF8F0;border:1px solid rgba(106,78,60,.16);border-radius:26px;box-shadow:0 -16px 40px -34px rgba(74,62,48,.3),0 30px 60px -38px rgba(74,62,48,.45);padding:clamp(26px,4vw,52px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px;align-items:center;margin-bottom:36px">
+    <div class="tpc-exp-img" style="position:relative;min-height:380px;border-radius:170px 170px 14px 14px;overflow:hidden;border:1px solid rgba(106,78,60,.16);background:repeating-linear-gradient(135deg,#EBE3D0 0 16px,#F4EDDD 16px 32px)">
+      <img src="assets/img/petit-care.jpg" alt="Petit Care" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><img src="assets/icons/icon-osito.png" alt="" width="30" height="30" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><h3 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(30px,3.6vw,44px);color:#5A6733">Petit Care</h3></div>
+      <p style="margin:0 0 16px;font-family:'Sorts Mill Goudy',Georgia,serif;font-style:italic;font-size:21px;line-height:1.35;color:#6A4E3C">¿Estás organizando una comunión, un bautizo o una celebración familiar?</p>
+      <p style="margin:0 0 24px;font-size:17.5px;line-height:1.7;color:#5C4B3D;max-width:52ch">Nos encargamos de que los peques tengan su propio espacio de diversión con juegos, talleres y actividades diseñadas para que el evento sea especial para toda la familia.</p>
+      <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:22px;font-family:'Sorts Mill Goudy',Georgia,serif;font-size:24px;color:#5A6733">
+        <span>2 horas · 95 €</span>
+        <span>3 horas · 135 €</span>
+        <span>4 horas · 170 €</span>
+      </div>
+      <a class="tpc-btn-line" href="{{ reservarUrl }}" style="display:inline-flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#5A6733;border:1px solid #5A6733;padding:14px 30px;border-radius:100px;transition:all .3s">Reservar</a>
+      <p style="margin:20px 0 0;font-style:italic;font-size:15px;color:#6f6050">Cada celebración es única. Solicita tu presupuesto personalizado.</p>
+    </div>
+  </div>
+
+  <!-- Petit Business -->
+  <div id="petit-business" class="tpc-exp" style="background:#FBF8F0;border:1px solid rgba(106,78,60,.16);border-radius:26px;box-shadow:0 -16px 40px -34px rgba(74,62,48,.3),0 30px 60px -38px rgba(74,62,48,.45);padding:clamp(26px,4vw,52px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:44px;align-items:center;margin-bottom:0">
+    <div style="order:2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><img src="assets/icons/icon-maletin.png" alt="" width="30" height="30" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><h3 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(30px,3.6vw,44px);color:#5A6733">Petit Business</h3></div>
+      <p style="margin:0 0 16px;font-family:'Sorts Mill Goudy',Georgia,serif;font-style:italic;font-size:21px;line-height:1.35;color:#6A4E3C">¿Quieres que tu evento también esté pensado para las familias?</p>
+      <p style="margin:0 0 24px;font-size:17.5px;line-height:1.7;color:#5C4B3D;max-width:52ch">Creamos espacios infantiles para empresas, ferias y eventos corporativos, ofreciendo actividades educativas y de ocio para que los más pequeños también formen parte de la experiencia.</p>
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:22px">
+        <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:30px;color:#5A6733">Desde 250 €</span>
+      </div>
+      <a class="tpc-btn-line" href="{{ reservarUrl }}" style="display:inline-flex;align-items:center;gap:10px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#5A6733;border:1px solid #5A6733;padding:14px 30px;border-radius:100px;transition:all .3s">Reservar</a>
+      <p style="margin:20px 0 0;font-style:italic;font-size:15px;color:#6f6050">Cada celebración es única. Solicita tu presupuesto personalizado.</p>
+    </div>
+    <div class="tpc-exp-img" style="order:1;position:relative;min-height:380px;border-radius:170px 170px 14px 14px;overflow:hidden;border:1px solid rgba(106,78,60,.16);background:repeating-linear-gradient(135deg,#EBE3D0 0 16px,#F4EDDD 16px 32px)">
+      <img src="assets/img/petit-business.jpg" alt="Petit Business" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUÉ INCLUYE ===================== -->
+<section id="incluye" style="position:relative;padding:96px 30px;margin-top:40px;background-color:#EDE6D5;background-image:repeating-linear-gradient(0deg,rgba(150,164,116,.22) 0 17px,transparent 17px 34px),repeating-linear-gradient(90deg,rgba(150,164,116,.22) 0 17px,transparent 17px 34px)">
+  <div style="max-width:1000px;margin:0 auto;background:#FBF8F0;border-radius:8px;padding:clamp(36px,6vw,72px);box-shadow:0 30px 60px -40px rgba(74,62,48,.45)">
+    <div data-reveal style="text-align:center;margin-bottom:44px">
+      <div style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#B0864C;margin-bottom:12px">03 — En cada experiencia</div>
+      <h2 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(38px,5vw,60px);color:#5A6733">¿Qué incluye?</h2>
+    </div>
+    <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 40px">
+      <div style="display:flex;align-items:center;gap:15px;padding:16px 4px;border-bottom:1px solid rgba(106,78,60,.14)"><img src="assets/icons/icon-juegos.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><span class="tpc-incl" style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:25px;color:#6A4E3C">Juegos y dinámicas</span></div>
+      <div style="display:flex;align-items:center;gap:15px;padding:16px 4px;border-bottom:1px solid rgba(106,78,60,.14)"><img src="assets/icons/icon-taller.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><span class="tpc-incl" style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:25px;color:#6A4E3C">Taller creativo</span></div>
+      <div style="display:flex;align-items:center;gap:15px;padding:16px 4px;border-bottom:1px solid rgba(106,78,60,.14)"><img src="assets/icons/icon-cuento.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><span class="tpc-incl" style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:25px;color:#6A4E3C">Cuentacuentos</span></div>
+      <div style="display:flex;align-items:center;gap:15px;padding:16px 4px;border-bottom:1px solid rgba(106,78,60,.14)"><img src="assets/icons/icon-cometa.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><span class="tpc-incl" style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:25px;color:#6A4E3C">Juego libre</span></div>
+      <div style="display:flex;align-items:center;gap:15px;padding:16px 4px;border-bottom:1px solid rgba(106,78,60,.14)"><img src="assets/icons/icon-merienda.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><span class="tpc-incl" style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:25px;color:#6A4E3C">Acompañamiento durante la merienda</span></div>
+      <div style="display:flex;align-items:center;gap:15px;padding:16px 4px;border-bottom:1px solid rgba(106,78,60,.14)"><img src="assets/icons/icon-musica.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><span class="tpc-incl" style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:25px;color:#6A4E3C">Música y baile</span></div>
+      <div style="display:flex;align-items:center;gap:15px;padding:16px 4px;border-bottom:1px solid rgba(106,78,60,.14)"><img src="assets/icons/icon-material.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><span class="tpc-incl" style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:25px;color:#6A4E3C">Material incluido</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== INFORMACIÓN IMPORTANTE ===================== -->
+<section id="info" style="max-width:1100px;margin:0 auto;padding:104px 30px 60px">
+  <div data-reveal style="text-align:center;margin-bottom:52px">
+    <div style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#B0864C;margin-bottom:12px">04 — Antes de reservar</div>
+    <h2 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(38px,5vw,60px);color:#5A6733">Información importante</h2>
+  </div>
+  <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px 44px">
+    <div style="display:flex;gap:16px;padding:20px 0;border-top:1px solid rgba(106,78,60,.16)"><svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg><p style="margin:0;font-size:19px;line-height:1.55;color:#5C4B3D">Destinado a niños y niñas de 2 a 6 años.</p></div>
+    <div style="display:flex;gap:16px;padding:20px 0;border-top:1px solid rgba(106,78,60,.16)"><svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg><p style="margin:0;font-size:19px;line-height:1.55;color:#5C4B3D">Hablamos castellano, inglés y francés.</p></div>
+    <div style="display:flex;gap:16px;padding:20px 0;border-top:1px solid rgba(106,78,60,.16)"><svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg><p style="margin:0;font-size:19px;line-height:1.55;color:#5C4B3D">Grupos de hasta 8 peques incluidos con una educadora.</p></div>
+    <div style="display:flex;gap:16px;padding:20px 0;border-top:1px solid rgba(106,78,60,.16)"><svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg><p style="margin:0;font-size:19px;line-height:1.55;color:#5C4B3D">A partir de 9 niños será necesaria una segunda educadora (+100 €).</p></div>
+    <div style="display:flex;gap:16px;padding:20px 0;border-top:1px solid rgba(106,78,60,.16)"><svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg><p style="margin:0;font-size:19px;line-height:1.55;color:#5C4B3D">Todo el material para las actividades está incluido.</p></div>
+    <div style="display:flex;gap:16px;padding:20px 0;border-top:1px solid rgba(106,78,60,.16)"><svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg><p style="margin:0;font-size:19px;line-height:1.55;color:#5C4B3D">Desplazamiento incluido en Barcelona ciudad. (Consultar suplemento para otras localidades).</p></div>
+    <div style="display:flex;gap:16px;padding:20px 0;border-top:1px solid rgba(106,78,60,.16)"><svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg><p style="margin:0;font-size:19px;line-height:1.55;color:#5C4B3D">Todas las experiencias son personalizadas y adaptadas a la edad, al espacio y a la temática del evento.</p></div>
+    <div style="display:flex;gap:16px;padding:20px 0;border-top:1px solid rgba(106,78,60,.16)"><svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg><p style="margin:0;font-size:19px;line-height:1.55;color:#5C4B3D">Se recomienda realizar la reserva con la máxima antelación posible para garantizar disponibilidad.</p></div>
+  </div>
+</section>
+
+<!-- ===================== PETIT EXTRAS ===================== -->
+<section id="extras" style="max-width:1180px;margin:0 auto;padding:60px 30px 40px">
+  <div data-reveal style="text-align:center;max-width:640px;margin:0 auto 56px">
+    <div style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#B0864C;margin-bottom:12px">05 — Servicios adicionales</div>
+    <h2 style="margin:0 0 16px;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(38px,5vw,60px);color:#5A6733">Petit Extras</h2>
+    <p style="margin:0;font-size:19px;line-height:1.6;color:#7d6d5b">Haz que tu experiencia sea todavía más especial con nuestros servicios adicionales. Pincha en cada uno para descubrirlo.</p>
+  </div>
+  <div data-reveal style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px">
+    <div class="tpc-x-card" tabindex="0" role="button" aria-haspopup="dialog" data-modal-open="tpcm-memories" style="background:#FBF8F0;border:1px solid rgba(106,78,60,.14);border-radius:8px;padding:36px 32px;display:flex;flex-direction:column;gap:14px;transition:all .3s">
+      <div style="display:flex;align-items:center;gap:11px"><img src="assets/icons/icon-camara.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><h3 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:600;font-size:27px;letter-spacing:.03em;color:#5A6733">Petit Memories</h3></div>
+      <img src="assets/img/petit-memories.jpg" alt="Petit Memories" loading="lazy" decoding="async" style="width:100%;height:190px;object-fit:cover;border-radius:6px"><p style="margin:0;font-size:17.5px;line-height:1.6;color:#5C4B3D;flex:1">Reportaje fotográfico durante el evento. 20-30 fotografías editadas en alta calidad.</p>
+      <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:28px;color:#B0864C">40 €</span>
+      <span style="font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#5A6733">Saber más →</span>
+    </div>
+    <div class="tpc-x-card" tabindex="0" role="button" aria-haspopup="dialog" data-modal-open="tpcm-design" style="background:#FBF8F0;border:1px solid rgba(106,78,60,.14);border-radius:8px;padding:36px 32px;display:flex;flex-direction:column;gap:14px;transition:all .3s">
+      <div style="display:flex;align-items:center;gap:11px"><img src="assets/icons/icon-guirnalda.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><h3 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:600;font-size:27px;letter-spacing:.03em;color:#5A6733">Petit Design</h3></div>
+      <img src="assets/img/petit-design.jpg" alt="Petit Design" loading="lazy" decoding="async" style="width:100%;height:190px;object-fit:cover;border-radius:6px"><p style="margin:0;font-size:17.5px;line-height:1.6;color:#5C4B3D;flex:1">Decoración personalizada según la temática elegida.</p>
+      <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:28px;color:#B0864C">Desde 75 €</span>
+      <span style="font-size:14.5px;font-style:italic;color:#6f6050">(Materiales no incluidos).</span>
+      <span style="font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#5A6733">Saber más →</span>
+    </div>
+    <div class="tpc-x-card" tabindex="0" role="button" aria-haspopup="dialog" data-modal-open="tpcm-favours" style="background:#FBF8F0;border:1px solid rgba(106,78,60,.14);border-radius:8px;padding:36px 32px;display:flex;flex-direction:column;gap:14px;transition:all .3s">
+      <div style="display:flex;align-items:center;gap:11px"><img src="assets/icons/icon-favours.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><h3 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:600;font-size:27px;letter-spacing:.03em;color:#5A6733">Petit Favours</h3></div>
+      <img src="assets/img/petit-favours.jpg" alt="Petit Favours" loading="lazy" decoding="async" style="width:100%;height:190px;object-fit:cover;border-radius:6px"><p style="margin:0;font-size:17.5px;line-height:1.6;color:#5C4B3D;flex:1">Detalles personalizados para los pequeños invitados.</p>
+      <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:28px;color:#B0864C">Desde 5 € por niño.</span>
+      <span style="font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#5A6733">Saber más →</span>
+    </div>
+    <div class="tpc-x-card" tabindex="0" role="button" aria-haspopup="dialog" data-modal-open="tpcm-glitter" style="background:#FBF8F0;border:1px solid rgba(106,78,60,.14);border-radius:8px;padding:36px 32px;display:flex;flex-direction:column;gap:14px;transition:all .3s">
+      <div style="display:flex;align-items:center;gap:11px"><img src="assets/icons/icon-purpurina.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><h3 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:600;font-size:27px;letter-spacing:.03em;color:#5A6733">Glitter Tattoos</h3></div>
+      <img src="assets/img/glitter-tattoos.jpg" alt="Glitter Tattoos" loading="lazy" decoding="async" style="width:100%;height:190px;object-fit:cover;border-radius:6px"><p style="margin:0;font-size:17.5px;line-height:1.6;color:#5C4B3D;flex:1">Tatuajes temporales con purpurina hipoalergénica.</p>
+      <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:28px;color:#B0864C">Desde 25 €</span>
+      <span style="font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#5A6733">Saber más →</span>
+    </div>
+    <div class="tpc-x-card" tabindex="0" role="button" aria-haspopup="dialog" data-modal-open="tpcm-pintacaras" style="background:#FBF8F0;border:1px solid rgba(106,78,60,.14);border-radius:8px;padding:36px 32px;display:flex;flex-direction:column;gap:14px;transition:all .3s">
+      <div style="display:flex;align-items:center;gap:11px"><img src="assets/icons/icon-pintacaras.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><h3 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:600;font-size:27px;letter-spacing:.03em;color:#5A6733">Pintacaras</h3></div>
+      <img src="assets/img/pintacaras.jpg" alt="Pintacaras" loading="lazy" decoding="async" style="width:100%;height:190px;object-fit:cover;border-radius:6px"><p style="margin:0;font-size:17.5px;line-height:1.6;color:#5C4B3D;flex:1">Maquillaje infantil con productos hipoalergénicos.</p>
+      <span style="font-family:'Sorts Mill Goudy',Georgia,serif;font-size:28px;color:#B0864C">50 €</span>
+      <span style="font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#5A6733">Saber más →</span>
+    </div>
+    <div style="border:1px dashed rgba(106,78,60,.3);border-radius:8px;padding:36px 32px;display:flex;flex-direction:column;justify-content:center;gap:12px;background:transparent">
+      <div style="display:flex;align-items:center;gap:11px"><img src="assets/icons/icon-mapa.png" alt="" width="26" height="26" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain"><h3 style="margin:0;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:600;font-size:27px;letter-spacing:.03em;color:#5A6733">Desplazamiento</h3></div>
+      <p style="margin:0;font-size:17.5px;line-height:1.7;color:#5C4B3D">Barcelona ciudad: Incluido.<br>Fuera de Barcelona: Consultar suplemento.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VALORES ===================== -->
+<sc-if value="{{ showValues }}" hint-placeholder-val="{{ true }}">
+<section style="background:#5A6733;padding:70px 30px;margin-top:60px">
+  <div style="max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:40px 24px;text-align:center">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px"><svg viewBox="0 0 40 40" width="38" height="38" fill="none" stroke="#EFE7D3" stroke-width="1.4" stroke-linejoin="round"><path d="M20 11 C16 8 10 8 6 9 V30 C10 29 16 29 20 32 C24 29 30 29 34 30 V9 C30 8 24 8 20 11 Z"/><path d="M20 11 V32"/></svg><span style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:#EFE7D3">Imaginar</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px"><svg viewBox="0 0 40 40" width="38" height="38" fill="none" stroke="#EFE7D3" stroke-width="1.4" stroke-linecap="round"><path d="M9 32 Q20 27 31 10"/><path d="M20 20 q6 -1 9 -6"/><path d="M15 25 q6 -1 9 -6"/><path d="M25 15 q4 -1 6 -5"/></svg><span style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:#EFE7D3">Crecer</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px"><svg viewBox="0 0 40 40" width="38" height="38" fill="none" stroke="#EFE7D3" stroke-width="1.4" stroke-linejoin="round"><path d="M20 6 L23.7 16.3 L34.5 16.8 L26 23.6 L28.9 34 L20 27.8 L11.1 34 L14 23.6 L5.5 16.8 L16.3 16.3 Z"/></svg><span style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:#EFE7D3">Descubrir</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px"><svg viewBox="0 0 40 40" width="38" height="38" fill="none" stroke="#EFE7D3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20 L20 9 L32 20"/><path d="M11 17.5 V31 H29 V17.5"/><path d="M16.5 31 V23 H23.5 V31"/><path d="M28 8 l1 2.6 2.8.2 -2.2 1.8 .7 2.7 -2.3-1.5 -2.3 1.5 .7-2.7 -2.2-1.8 2.8-.2 Z"/></svg><span style="font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:#EFE7D3">Pertenecer</span></div>
+  </div>
+</section>
+</sc-if>
+
+<!-- ===================== CONTACTO ===================== -->
+<footer id="contacto" style="position:relative;padding:110px 30px 60px;background-color:#EDE6D5;background-image:repeating-linear-gradient(0deg,rgba(150,164,116,.28) 0 18px,transparent 18px 36px),repeating-linear-gradient(90deg,rgba(150,164,116,.28) 0 18px,transparent 18px 36px)">
+  <div data-reveal style="max-width:820px;margin:0 auto;background:#FBF8F0;border-radius:8px;padding:clamp(36px,6vw,72px);text-align:center;box-shadow:0 34px 70px -40px rgba(74,62,48,.5)">
+    <div style="font-family:'Jost',sans-serif;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#B0864C;margin-bottom:16px">Contacto</div>
+    <h2 style="margin:0 0 8px;font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:500;font-size:clamp(36px,5vw,58px);line-height:1.05;color:#5A6733">¿Tienes una idea en mente?</h2>
+    <div style="width:70px;height:1px;background:#B0864C;margin:26px auto"></div>
+    <p style="margin:0 auto;max-width:52ch;font-size:19px;line-height:1.65;color:#5C4B3D">Cuéntanos cómo imaginas tu celebración y diseñaremos una experiencia totalmente personalizada para ti.</p>
+
+    <form id="tpc-form" class="tpc-form">
+      <div class="tpc-field">
+        <label for="f-nombre">Nombre *</label>
+        <input class="tpc-input" id="f-nombre" name="nombre" type="text" required="required" autocomplete="name" placeholder="Tu nombre">
+      </div>
+      <div class="tpc-field">
+        <label for="f-email">Email *</label>
+        <input class="tpc-input" id="f-email" name="email" type="email" required="required" autocomplete="email" placeholder="tu@email.com">
+      </div>
+      <div class="tpc-field">
+        <label for="f-tel">Teléfono</label>
+        <input class="tpc-input" id="f-tel" name="telefono" type="tel" autocomplete="tel" inputmode="tel" pattern="[0-9+\(\)\s\-]{9,17}" title="Introduce un teléfono válido (mínimo 9 dígitos)" placeholder="600 000 000">
+      </div>
+      <div class="tpc-field">
+        <label for="f-tipo">Tipo de experiencia *</label>
+        <select class="tpc-input" id="f-tipo" name="tipo" required="required">
+          <option value="" disabled="disabled" selected="selected" hidden="hidden">Elige una experiencia</option>
+          <option value="Petit Birthday">Petit Birthday</option>
+          <option value="Petit Wedding">Petit Wedding</option>
+          <option value="Petit Celebrations">Petit Celebrations</option>
+          <option value="Petit Care">Petit Care</option>
+          <option value="Petit Business">Petit Business</option>
+          <option value="Otra idea">Otra idea</option>
+        </select>
+      </div>
+      <div class="tpc-field">
+        <label for="f-fecha">Fecha del evento</label>
+        <input class="tpc-input" id="f-fecha" name="fecha" type="date">
+      </div>
+      <div class="tpc-field">
+        <label for="f-peques">Nº de peques</label>
+        <input class="tpc-input" id="f-peques" name="peques" type="number" min="1" max="60" inputmode="numeric" placeholder="8">
+      </div>
+      <div class="tpc-field tpc-span2">
+        <label for="f-msg">Cuéntanos tu idea *</label>
+        <textarea class="tpc-input" id="f-msg" name="mensaje" rows="4" required="required" placeholder="Cómo imaginas la celebración: el lugar, la temática, lo que os haría ilusión…"></textarea>
+      </div>
+      <div class="tpc-span2 tpc-form-actions">
+        <button type="submit" data-channel="wa" class="tpc-cta-solid"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>Enviar por WhatsApp</button>
+        <button type="submit" data-channel="mail" class="tpc-cta-line">Enviar por email</button>
+      </div>
+      <p class="tpc-span2 tpc-form-note">Al enviar se abrirá WhatsApp o tu aplicación de correo con el mensaje ya preparado; nada se envía sin que tú lo confirmes.</p>
+      <p class="tpc-span2" id="tpc-form-ok" hidden="hidden">¡Mensaje preparado! Solo te falta darle a enviar. Te responderemos muy pronto.</p>
+    </form>
+
+    <div style="width:70px;height:1px;background:#B0864C;margin:34px auto"></div>
+    <div class="tpc-contact-lines" style="display:flex;flex-direction:column;gap:10px;font-family:'Sorts Mill Goudy',Georgia,serif;font-size:19px;color:#6A4E3C">
+      <span style="display:inline-flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap"><img src="assets/icons/icon-telefono.png" alt="" width="19" height="19" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain">Teléfono: <a href="tel:+34633948883" style="color:#5A6733">633 948 883</a></span>
+      <span style="display:inline-flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap"><img src="assets/icons/icon-sobre.png" alt="" width="19" height="19" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain">Mail: <a href="mailto:info@thepetitclubbyblanca.com" style="color:#5A6733">info@thepetitclubbyblanca.com</a></span>
+      <span style="display:inline-flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap"><img src="assets/icons/icon-instagram.png" alt="" width="19" height="19" loading="lazy" decoding="async" style="flex-shrink:0;object-fit:contain">Instagram: <a href="https://instagram.com/thepetitclubbyblanca" target="_blank" rel="noopener" style="color:#5A6733">@thepetitclubbyblanca</a></span>
+    </div>
+  </div>
+  <div style="max-width:760px;margin:56px auto 0;display:flex;flex-direction:column;align-items:center;gap:18px">
+    <div style="width:120px;height:120px"><svg viewBox="0 0 200 200" width="100%" height="100%" fill="none"><circle cx="100" cy="100" r="94" stroke="#8A9666" stroke-width="1.3"/><defs><path id="tpcTopF" d="M42 100 A58 58 0 0 1 158 100"/><path id="tpcBotF" d="M42 100 A58 58 0 0 0 158 100"/></defs><text fill="#7C8A50" font-family="Sorts Mill Goudy, serif" font-size="16" letter-spacing="2.4"><textPath href="#tpcTopF" startOffset="50%" text-anchor="middle">THE PETIT CLUB</textPath></text><text fill="#7C8A50" font-family="Sorts Mill Goudy, serif" font-size="13.5" letter-spacing="2.2"><textPath href="#tpcBotF" startOffset="50%" side="left" text-anchor="middle">LITTLE EXPLORERS</textPath></text><g stroke="#7C8A50" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M80 105 L100 87 L120 105"/><path d="M84 102 V121 H116 V102"/><path d="M95 121 V111 H105 V121"/></g><path d="M124 83 l1.5 3.9 4.1.3 -3.2 2.7 1 4 -3.4-2.2 -3.4 2.2 1-4 -3.2-2.7 4.1-.3 Z" fill="#7C8A50"/><circle cx="61" cy="112" r="2" fill="#7C8A50"/><circle cx="139" cy="112" r="2" fill="#7C8A50"/></svg></div>
+    <div style="text-align:center">
+      <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.44em;color:#7d6d5b">THE</div>
+      <div style="font-family:'Sorts Mill Goudy',Georgia,serif;font-weight:600;font-size:24px;letter-spacing:.14em;color:#5A6733">PETIT CLUB</div>
+      <div style="font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#6f6050;margin-top:6px">Little Explorers · Barcelona</div>
+    </div>
+    <div style="font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#6f6050;text-align:center">© 2026 The Petit Club — Barcelona</div>
+  </div>
+</footer>
+
+<!-- ===================== MODALES PETIT EXTRAS ===================== -->
+<div class="tpc-modal" id="tpcm-memories" role="dialog" aria-modal="true" aria-labelledby="tpcm-memories-t">
+  <div class="tpc-modal-back"></div>
+  <div class="tpc-modal-panel" tabindex="-1">
+    <button type="button" class="tpc-modal-x" data-modal-close aria-label="Cerrar"><svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1 1 L13 13 M13 1 L1 13"/></svg></button>
+    <div class="tpc-modal-grid">
+      <div class="tpc-modal-media"><img src="assets/img/petit-memories.jpg" alt="Petit Memories — reportaje fotográfico" loading="lazy" decoding="async"></div>
+      <div class="tpc-modal-body">
+        <div class="tpc-kicker">Petit Extra</div>
+        <h3 id="tpcm-memories-t">Petit Memories</h3>
+        <p class="tpc-modal-lead">Porque los mejores momentos merecen ser recordados para siempre.</p>
+        <p class="tpc-modal-txt">Mientras los peques juegan, ríen y descubren, nuestra cámara captura todos esos instantes espontáneos que hacen única cada celebración. Al terminar, recibirás una selección de fotografías editadas con mimo, listas para guardar y compartir.</p>
+        <div class="tpc-modal-list">
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>20-30 fotografías editadas en alta calidad</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Cobertura de toda la experiencia</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Momentos naturales y espontáneos, sin poses forzadas</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Entrega en galería digital privada</div>
+        </div>
+        <p class="tpc-modal-price">40 €</p>
+        <p class="tpc-modal-note">El complemento perfecto para cualquier experiencia.</p>
+        <div class="tpc-modal-cta">
+          <a class="tpc-cta-solid" href="{{ reservarUrl }}" data-modal-close>Reservar</a>
+          <a class="tpc-cta-line" href="https://wa.me/34633948883" data-wa-text="¡Hola! Me interesa el extra Petit Memories para mi celebración. ¿Me podéis dar más información?" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tpc-modal" id="tpcm-design" role="dialog" aria-modal="true" aria-labelledby="tpcm-design-t">
+  <div class="tpc-modal-back"></div>
+  <div class="tpc-modal-panel" tabindex="-1">
+    <button type="button" class="tpc-modal-x" data-modal-close aria-label="Cerrar"><svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1 1 L13 13 M13 1 L1 13"/></svg></button>
+    <div class="tpc-modal-grid">
+      <div class="tpc-modal-media"><img src="assets/img/petit-design.jpg" alt="Petit Design — decoración personalizada" loading="lazy" decoding="async"></div>
+      <div class="tpc-modal-body">
+        <div class="tpc-kicker">Petit Extra</div>
+        <h3 id="tpcm-design-t">Petit Design</h3>
+        <p class="tpc-modal-lead">Transformamos el espacio para que la magia empiece antes de jugar.</p>
+        <p class="tpc-modal-txt">Diseñamos la decoración según la temática elegida: rincones de juego, guirnaldas, banderines y pequeños detalles que convierten cualquier lugar en un mundo por descubrir. Nos coordinamos contigo para que todo respire el mismo estilo que tu celebración.</p>
+        <div class="tpc-modal-list">
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Propuesta personalizada según temática y espacio</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Montaje y desmontaje incluidos</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Detalles decorativos coordinados con la experiencia</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Adaptable a interiores y exteriores</div>
+        </div>
+        <p class="tpc-modal-price">Desde 75 €</p>
+        <p class="tpc-modal-note">(Materiales no incluidos; se presupuestan según el proyecto).</p>
+        <div class="tpc-modal-cta">
+          <a class="tpc-cta-solid" href="{{ reservarUrl }}" data-modal-close>Reservar</a>
+          <a class="tpc-cta-line" href="https://wa.me/34633948883" data-wa-text="¡Hola! Me interesa el extra Petit Design para mi celebración. ¿Me podéis dar más información?" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tpc-modal" id="tpcm-favours" role="dialog" aria-modal="true" aria-labelledby="tpcm-favours-t">
+  <div class="tpc-modal-back"></div>
+  <div class="tpc-modal-panel" tabindex="-1">
+    <button type="button" class="tpc-modal-x" data-modal-close aria-label="Cerrar"><svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1 1 L13 13 M13 1 L1 13"/></svg></button>
+    <div class="tpc-modal-grid">
+      <div class="tpc-modal-media"><img src="assets/img/petit-favours.jpg" alt="Petit Favours — detalles para los invitados" loading="lazy" decoding="async"></div>
+      <div class="tpc-modal-body">
+        <div class="tpc-kicker">Petit Extra</div>
+        <h3 id="tpcm-favours-t">Petit Favours</h3>
+        <p class="tpc-modal-lead">Un pequeño recuerdo para que la aventura continúe en casa.</p>
+        <p class="tpc-modal-txt">Preparamos detalles pensados con mimo para cada invitado: personalizados con su nombre, adaptados a la temática de la celebración y elegidos para que sigan jugando, creando e imaginando cuando la fiesta termine.</p>
+        <div class="tpc-modal-list">
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Detalles personalizados con el nombre de cada peque</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Coordinados con la temática del evento</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Opciones adaptadas a cada edad</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Presentación cuidada, lista para entregar</div>
+        </div>
+        <p class="tpc-modal-price">Desde 5 € por niño</p>
+        <div class="tpc-modal-cta">
+          <a class="tpc-cta-solid" href="{{ reservarUrl }}" data-modal-close>Reservar</a>
+          <a class="tpc-cta-line" href="https://wa.me/34633948883" data-wa-text="¡Hola! Me interesa el extra Petit Favours para mi celebración. ¿Me podéis dar más información?" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tpc-modal" id="tpcm-glitter" role="dialog" aria-modal="true" aria-labelledby="tpcm-glitter-t">
+  <div class="tpc-modal-back"></div>
+  <div class="tpc-modal-panel" tabindex="-1">
+    <button type="button" class="tpc-modal-x" data-modal-close aria-label="Cerrar"><svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1 1 L13 13 M13 1 L1 13"/></svg></button>
+    <div class="tpc-modal-grid">
+      <div class="tpc-modal-media"><img src="assets/img/glitter-tattoos.jpg" alt="Glitter Tattoos — tatuajes con purpurina" loading="lazy" decoding="async"></div>
+      <div class="tpc-modal-body">
+        <div class="tpc-kicker">Petit Extra</div>
+        <h3 id="tpcm-glitter-t">Glitter Tattoos</h3>
+        <p class="tpc-modal-lead">Brillos que convierten a cada peque en protagonista.</p>
+        <p class="tpc-modal-txt">Un rincón brillante que triunfa en cualquier celebración: tatuajes temporales con purpurina hipoalergénica, segura para la piel infantil. Cada peque elige su diseño favorito y se lo lleva puesto como recuerdo del día.</p>
+        <div class="tpc-modal-list">
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Purpurina cosmética hipoalergénica</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Gran variedad de diseños para elegir</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Apto para pieles sensibles</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Se retiran fácilmente con agua y jabón</div>
+        </div>
+        <p class="tpc-modal-price">Desde 25 €</p>
+        <div class="tpc-modal-cta">
+          <a class="tpc-cta-solid" href="{{ reservarUrl }}" data-modal-close>Reservar</a>
+          <a class="tpc-cta-line" href="https://wa.me/34633948883" data-wa-text="¡Hola! Me interesa el extra Glitter Tattoos para mi celebración. ¿Me podéis dar más información?" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tpc-modal" id="tpcm-pintacaras" role="dialog" aria-modal="true" aria-labelledby="tpcm-pintacaras-t">
+  <div class="tpc-modal-back"></div>
+  <div class="tpc-modal-panel" tabindex="-1">
+    <button type="button" class="tpc-modal-x" data-modal-close aria-label="Cerrar"><svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1 1 L13 13 M13 1 L1 13"/></svg></button>
+    <div class="tpc-modal-grid">
+      <div class="tpc-modal-media"><img src="assets/img/pintacaras.jpg" alt="Pintacaras — maquillaje infantil" loading="lazy" decoding="async"></div>
+      <div class="tpc-modal-body">
+        <div class="tpc-kicker">Petit Extra</div>
+        <h3 id="tpcm-pintacaras-t">Pintacaras</h3>
+        <p class="tpc-modal-lead">Mariposas, tigres y superhéroes: que su imaginación tome forma.</p>
+        <p class="tpc-modal-txt">El clásico que nunca falla. Nuestro rincón de pintacaras transforma a los peques en sus personajes favoritos con maquillaje hipoalergénico especialmente pensado para la piel infantil.</p>
+        <div class="tpc-modal-list">
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Productos hipoalergénicos aptos para piel infantil</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Diseños a elegir, adaptados a cada edad</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>Se retira fácilmente</div>
+          <div><svg viewBox="0 0 24 24" width="13" height="13" fill="#B0864C"><path d="M12 1.4 L13.8 10.2 L22.6 12 L13.8 13.8 L12 22.6 L10.2 13.8 L1.4 12 L10.2 10.2 Z"/></svg>El recuerdo perfecto para las fotos</div>
+        </div>
+        <p class="tpc-modal-price">50 €</p>
+        <div class="tpc-modal-cta">
+          <a class="tpc-cta-solid" href="{{ reservarUrl }}" data-modal-close>Reservar</a>
+          <a class="tpc-cta-line" href="https://wa.me/34633948883" data-wa-text="¡Hola! Me interesa el extra Pintacaras para mi celebración. ¿Me podéis dar más información?" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== BOTÓN FLOTANTE WHATSAPP ===================== -->
+<a class="tpc-wa" href="https://wa.me/34633948883" data-wa-text="¡Hola! Me gustaría recibir más información sobre The Petit Club 🌿" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg>
+</a>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:4200},&quot;showValues&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Estilo&quot;},&quot;showMarquee&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Estilo&quot;},&quot;reservarUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#contacto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Reservas&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      showValues: this.props.showValues ?? true,
+      showMarquee: this.props.showMarquee ?? true,
+      reservarUrl: (this.props.reservarUrl && this.props.reservarUrl.trim()) || '#contacto',
+    };
+  }
+  componentDidMount() {
+    if (document.documentElement.dataset.tpcBound) return;
+    document.documentElement.dataset.tpcBound = '1';
+    // ---------- Reveal on scroll ----------
+    try {
+      const els = Array.from(document.querySelectorAll('[data-reveal]'));
+      if (els.length) {
+        els.forEach(el => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(28px)';
+          el.style.transition = 'opacity .85s ease, transform .85s cubic-bezier(.2,.7,.2,1)';
+          el.style.willChange = 'opacity, transform';
+        });
+        const reveal = (el) => { el.dataset.shown = '1'; el.style.opacity = '1'; el.style.transform = 'none'; };
+        const check = () => {
+          const h = window.innerHeight || 800;
+          els.forEach(el => {
+            if (el.dataset.shown) return;
+            const r = el.getBoundingClientRect();
+            if (r.top < h * 0.92 && r.bottom > -50) reveal(el);
+          });
+        };
+        let ticking = false;
+        const onScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => { check(); ticking = false; });
+        };
+        check();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        setTimeout(check, 300);
+        setTimeout(() => els.forEach(reveal), 3500);
+      }
+    } catch (err) {}
+
+    // ---------- Menú móvil ----------
+    try {
+      const burger = document.querySelector('.tpc-burger');
+      const mnav = document.getElementById('tpc-mnav');
+      if (burger && mnav) {
+        const setOpen = (open) => {
+          burger.classList.toggle('open', open);
+          mnav.classList.toggle('open', open);
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        };
+        burger.addEventListener('click', () => setOpen(!mnav.classList.contains('open')));
+        mnav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+      }
+    } catch (err) {}
+
+    // ---------- Enlaces de WhatsApp con texto prefijado ----------
+    try {
+      document.querySelectorAll('[data-wa-text]').forEach(el => {
+        el.setAttribute('href', 'https://wa.me/34633948883?text=' + encodeURIComponent(el.getAttribute('data-wa-text')));
+      });
+    } catch (err) {}
+
+    // ---------- Modales Petit Extras ----------
+    try {
+      let lastFocus = null;
+      let openModalEl = null;
+      const closeModal = (m) => {
+        if (!m) return;
+        m.classList.remove('in');
+        openModalEl = null;
+        document.body.style.overflow = '';
+        setTimeout(() => { if (!m.classList.contains('in')) m.classList.remove('open'); }, 520);
+        if (lastFocus && lastFocus.focus) { try { lastFocus.focus(); } catch (e) {} }
+      };
+      const openModal = (id, trigger) => {
+        const m = document.getElementById(id);
+        if (!m) return;
+        lastFocus = trigger || null;
+        openModalEl = m;
+        m.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => requestAnimationFrame(() => { if (openModalEl === m) m.classList.add('in'); }));
+        const x = m.querySelector('.tpc-modal-x');
+        if (x) setTimeout(() => { if (openModalEl === m) { try { x.focus(); } catch (e) {} } }, 80);
+      };
+      document.querySelectorAll('[data-modal-open]').forEach(card => {
+        const id = card.getAttribute('data-modal-open');
+        card.addEventListener('click', () => openModal(id, card));
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(id, card); }
+        });
+      });
+      document.querySelectorAll('.tpc-modal').forEach(m => {
+        m.addEventListener('click', (e) => {
+          if (e.target.closest('[data-modal-close]') || !e.target.closest('.tpc-modal-panel')) closeModal(m);
+        });
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && openModalEl) { closeModal(openModalEl); return; }
+        if (e.key !== 'Tab' || !openModalEl) return;
+        const f = openModalEl.querySelectorAll('a[href], button, [tabindex]:not([tabindex="-1"])');
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1];
+        if (!openModalEl.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    } catch (err) {}
+
+    // ---------- Apilado de experiencias con scroll ----------
+    try {
+      const cards = Array.prototype.slice.call(document.querySelectorAll('.tpc-exp'));
+      if (cards.length > 1) {
+        const mq = window.matchMedia('(min-width: 861px) and (min-height: 641px)');
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const update = () => {
+          if (!mq.matches || reduced.matches) {
+            cards.forEach(c => { c.style.transform = ''; c.style.opacity = ''; });
+            return;
+          }
+          for (let i = 0; i < cards.length - 1; i++) {
+            const cr = cards[i].getBoundingClientRect();
+            const nr = cards[i + 1].getBoundingClientRect();
+            const stickyTop = parseFloat(window.getComputedStyle(cards[i]).top) || 0;
+            let p = (stickyTop + cr.height - nr.top) / cr.height;
+            p = Math.max(0, Math.min(1, p));
+            cards[i].style.transform = p > 0 ? 'scale(' + (1 - p * 0.05).toFixed(4) + ')' : '';
+          }
+        };
+        let ticking = false;
+        const onScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => { update(); ticking = false; });
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        update();
+      }
+    } catch (err) {}
+
+    // ---------- Formulario de contacto ----------
+    try {
+      const form = document.getElementById('tpc-form');
+      if (form) {
+        const fecha = document.getElementById('f-fecha');
+        if (fecha) { try { fecha.min = new Date().toISOString().slice(0, 10); } catch (e) {} }
+        let picked = 'wa';
+        form.querySelectorAll('button[type=submit]').forEach(b => {
+          b.addEventListener('click', () => { picked = b.getAttribute('data-channel') || 'wa'; });
+        });
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (form.reportValidity && !form.reportValidity()) return;
+          const v = (id) => { const el = document.getElementById(id); return el && el.value ? el.value.trim() : ''; };
+          const fechaBonita = v('f-fecha') ? v('f-fecha').split('-').reverse().join('/') : '';
+          const parts = [];
+          parts.push('¡Hola! Soy ' + v('f-nombre') + ' y me gustaría organizar una celebración con The Petit Club.');
+          parts.push('');
+          parts.push('Experiencia: ' + v('f-tipo'));
+          if (fechaBonita) parts.push('Fecha del evento: ' + fechaBonita);
+          if (v('f-peques')) parts.push('Nº de peques: ' + v('f-peques'));
+          if (v('f-tel')) parts.push('Teléfono: ' + v('f-tel'));
+          parts.push('Email: ' + v('f-email'));
+          parts.push('');
+          parts.push(v('f-msg'));
+          const text = parts.join('\n');
+          const channel = (e.submitter && e.submitter.getAttribute('data-channel')) || picked;
+          if (channel === 'mail') {
+            const subject = 'Consulta · ' + v('f-tipo') + ' · ' + v('f-nombre');
+            window.location.href = 'mailto:info@thepetitclubbyblanca.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
+          } else {
+            window.open('https://wa.me/34633948883?text=' + encodeURIComponent(text), '_blank', 'noopener');
+          }
+          const ok = document.getElementById('tpc-form-ok');
+          if (ok) { ok.hidden = false; setTimeout(() => { ok.hidden = true; }, 8000); }
+        });
+      }
+    } catch (err) {}
+  }
+}
+</script>
+</body>
+</html>
