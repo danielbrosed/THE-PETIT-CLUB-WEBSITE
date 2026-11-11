@@ -1,9 +1,21 @@
-# The Petit Club — endurecimiento del servidor
+# The Petit Club — configuración del servidor (LiteSpeed / Apache en Hostinger)
+# La raíz del repositorio es la raíz web: este archivo decide qué se publica.
 
-# Nadie puede pedir config.php directamente desde el navegador
-<Files "config.php">
+DirectoryIndex index.html
+
+# Nadie puede pedir desde el navegador la configuración, la documentación,
+# el archivo fuente .dc.html ni los archivos ocultos.
+<FilesMatch "(^\.|\.md$|\.dc\.html$|^config(\.sample)?\.php$|^LICENSE$)">
   Require all denied
-</Files>
+</FilesMatch>
+
+# Ni la carpeta .git (si el despliegue la deja) ni la librería de correo,
+# que solo se carga desde enviar.php.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule (^|/)\.git(/|$) - [R=404,L]
+  RewriteRule ^php/ - [R=404,L]
+</IfModule>
 
 # Cabeceras de seguridad básicas
 <IfModule mod_headers.c>
@@ -11,4 +23,11 @@
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# Caché de imágenes en el navegador
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 7 days"
+  ExpiresByType image/png "access plus 7 days"
 </IfModule>

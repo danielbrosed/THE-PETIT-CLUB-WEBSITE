@@ -1,9 +1,14 @@
 <?php
 /**
- * Copia este archivo como `config.php` EN EL SERVIDOR (junto a enviar.php)
- * y rellena los valores reales. `config.php` NUNCA debe subirse al
- * repositorio (está en .gitignore): contiene la contraseña del buzón
- * y el correo destino privado.
+ * Plantilla de configuración del formulario de contacto.
+ *
+ * Copia este archivo como `config.php`, rellena los valores reales y súbelo
+ * UNA VEZ al servidor, a la carpeta que contiene public_html (una por encima
+ * de la raíz web). Ahí no es accesible desde el navegador y los despliegues
+ * desde Git no lo sobrescriben.
+ *
+ * `config.php` NUNCA se sube al repositorio (está en .gitignore): contiene la
+ * contraseña del buzón y el correo destino privado.
  */
 return [
     'smtp_host' => 'smtp.hostinger.com',

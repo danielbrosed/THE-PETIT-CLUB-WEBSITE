@@ -35,11 +35,23 @@ foreach (['HTTP_ORIGIN', 'HTTP_REFERER'] as $h) {
     }
 }
 
-$config = __DIR__ . '/config.php';
-if (!is_file($config)) {
+// config.php vive una carpeta por encima de public_html: no es accesible desde
+// la web y los despliegues desde Git no lo tocan. Se admite también junto a
+// enviar.php (protegido por .htaccess) por compatibilidad.
+$config = null;
+foreach ([dirname(__DIR__) . '/config.php', __DIR__ . '/config.php'] as $ruta) {
+    if (is_file($ruta)) {
+        $config = $ruta;
+        break;
+    }
+}
+if ($config === null) {
     $fallo(500, 'configuracion');
 }
 $cfg = require $config;
+if (!is_array($cfg) || empty($cfg['smtp_user']) || empty($cfg['smtp_pass']) || empty($cfg['dest'])) {
+    $fallo(500, 'configuracion');
+}
 
 // Honeypot: los bots lo rellenan; se responde éxito sin enviar nada.
 if (!empty($_POST['web'])) {
